@@ -1,12 +1,6 @@
 <!--suppress ALL -->
 <html>
   <head>
-    <!--<style>-->
-        <!--div.chart_div table {-->
-            <!--width: auto;-->
-            <!--margin: 0 auto !important;-->
-        <!--}-->
-    <!--</style>-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -24,6 +18,11 @@
           pieSliceTextStyle: {
             color: 'white',
           },
+          animation: {
+              duration: 500,
+              easing: 'inAndOut',
+              startup: true
+          }
           legend: '',
           backgroundColor: {
             stroke: '#e6e6e6',
