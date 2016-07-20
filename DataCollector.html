@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -8,8 +9,8 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Effort', 'Amount given'],
-          ['Online', 90],
-          ['Offline', 10]
+          ['Online', 60],
+          ['Offline', 40]
         ]);
 
         var options = {
@@ -40,6 +41,20 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
         chart.draw(data, options);
+      }
+
+      function openFile() {
+          if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
+          } else {
+              // code for IE6, IE5
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.open("GET", "last_number.txt", false);
+          xmlhttp.send();
+          lastNumber = xmlhttp.responseText;
+          console.log(lastNumber);
       }
     </script>
   </head>
