@@ -12,7 +12,7 @@ i = 0
 # client = pymongo.MongoClient()
 # db = client.test
 
-print(str(len(users)) + " человек:")
+print(str(len(users)) + " people:")
 
 for user_id in users:
     url += user_id + ","
@@ -29,11 +29,11 @@ for user in profiles:
     if is_online:
         online_counter += 1
 
-    online_message = "не онлайн" if is_online == 0 else "онлайн"
+    online_message = "is not online" if is_online == 0 else "is online"
 
     if 'online_mobile' in user.keys():
         print(first_name + " " + last_name + " " + online_message, end="")
-        print(" через мобильную версию сайта или приложение")
+        print(" from mobile site or app")
     else:
         print(first_name + " " + last_name + " " + online_message)
 
