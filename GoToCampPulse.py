@@ -9,8 +9,8 @@ url = "https://api.vk.com/method/users.get?fields=online&user_ids="
 online_counter = 0
 i = 0
 
-# client = pymongo.MongoClient()
-# db = client.test
+client = pymongo.MongoClient()
+db = client.test
 
 print(str(len(users)) + " people:")
 
@@ -40,8 +40,8 @@ for user in profiles:
 with open("last_number.txt", "w") as last_record:
     last_record.write(str(online_counter))
 
-# db.user_stats.insert_one(
-#     {
-#         int(time.time()): profiles
-#     }
-# )
+db.user_stats.insert_one(
+    {
+        int(time.time()): profiles
+    }
+)
