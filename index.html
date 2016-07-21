@@ -4,14 +4,11 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
+      google.charts.setOnLoadCallback(readTextFile("last_number.txt"));
 
-        var data = google.visualization.arrayToDataTable([
-          ['Effort', 'Amount given'],
-          ['Online', 60],
-          ['Offline', 40]
-        ]);
+      function drawChart(input) {
+
+        var data = google.visualization.arrayToDataTable(input);
 
         var options = {
           pieHole: 0.55,
@@ -38,23 +35,36 @@
              }
           }
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
         chart.draw(data, options);
       }
 
-      function openFile() {
-          if (window.XMLHttpRequest) {
-              // code for IE7+, Firefox, Chrome, Opera, Safari
-              xmlhttp = new XMLHttpRequest();
-          } else {
-              // code for IE6, IE5
-              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      function readTextFile(file)
+      {
+          var rawFile = new XMLHttpRequest();
+          var allText;
+          rawFile.open("GET", file, false);
+          rawFile.onreadystatechange = function ()
+          {
+              if(rawFile.readyState === 4)
+              {
+                  if(rawFile.status === 200 || rawFile.status == 0)
+                  {
+                      allText = rawFile.responseText;
+                      var input = [
+                        ['Online', convertOnlineNumberToPercents(parseInt(allText))],
+                        ['Offline', 100 - convertOnlineNumberToPercents(parseInt(allText))]
+                      ];
+                      drawChart(input);
+                  }
+              }
           }
-          xmlhttp.open("GET", "last_number.txt", false);
-          xmlhttp.send();
-          lastNumber = xmlhttp.responseText;
-          console.log(lastNumber);
+          rawFile.send(null);
+      }
+
+      function convertOnlineNumberToPercents(online) {
+          var numberOfPeople = 38;
+          return Math.round(online / (numberOfPeople / 100));
       }
     </script>
   </head>
