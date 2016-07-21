@@ -18,7 +18,7 @@ for user_id in users:
     url += user_id + ","
 
 profiles = requests.get(url).json()['response']
-print(profiles)
+# print(profiles)
 
 for user in profiles:
     first_name = user['first_name']
