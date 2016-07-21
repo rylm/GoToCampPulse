@@ -76,6 +76,9 @@ for user_id in users:
     else:
         print(first_name + " " + last_name + " " + online_message)
 
+with open("last_number.txt", "w") as last_record:
+    last_record.write(str(online_counter))
+
 # db.onliness.insert_one(
 #     {
 #         "online_counter": online_counter,
