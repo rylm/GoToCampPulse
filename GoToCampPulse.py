@@ -42,6 +42,6 @@ with open("last_number.txt", "w") as last_record:
 
 db.user_stats.insert_one(
     {
-        int(time.time()): profiles
+        str(int(time.time())): profiles
     }
 )
