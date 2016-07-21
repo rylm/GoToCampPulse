@@ -4,7 +4,7 @@
     <title>GoTo Camp Pulse</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      
+      var numberOfPeople = 47;
       function drawChart(input) {
 
         var data = google.visualization.arrayToDataTable(input);
@@ -55,10 +55,12 @@
                       console.log(peopleOnline);
                       var percentsOnline = convertOnlineNumberToPercents(peopleOnline);
                       console.log(percentsOnline);
+                      var onlineString = 'Online - ' + peopleOnline.toString() + ' (' + percentsOnline.toString() + '%)'
+                      var offlineString = 'Offline - ' + (numberOfPeople - peopleOnline).toString() + ' (' + (100 - percentsOnline).toString() + '%)'
                       var input = [
                         ['Task', 'Hours per Day'],
-                        ['Online', percentsOnline],
-                        ['Offline', 100 - percentsOnline]
+                        [onlineString, percentsOnline],
+                        [offlineString, 100 - percentsOnline]
                       ];
                       console.log(input);
                       drawChart(input);
@@ -69,7 +71,6 @@
       }
 
       function convertOnlineNumberToPercents(online) {
-          var numberOfPeople = 47;
           return Math.round(online / (numberOfPeople / 100));
       }
 
