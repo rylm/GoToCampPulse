@@ -49,11 +49,17 @@
                   if(rawFile.status === 200 || rawFile.status == 0)
                   {
                       allText = rawFile.responseText;
+                      console.log(allText);
+                      var peopleOnline = parseInt(allText);
+                      console.log(peopleOnline);
+                      var percentsOnline = convertOnlineNumberToPercents(peopleOnline);
+                      console.log(percentsOnline);
                       var input = [
                         ['Task', 'Hours per Day'],
-                        ['Online', convertOnlineNumberToPercents(parseInt(allText))],
-                        ['Offline', 100 - convertOnlineNumberToPercents(parseInt(allText))]
+                        ['Online', percentsOnline],
+                        ['Offline', 100 - percentsOnline]
                       ];
+                      console.log(input);
                       drawChart(input);
                   }
               }
