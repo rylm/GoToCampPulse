@@ -1,6 +1,7 @@
 import requests
 import pymongo
 import time
+import datetime
 
 from users import users
 
@@ -11,6 +12,10 @@ i = 0
 
 client = pymongo.MongoClient()
 db = client.test
+
+datetime_now = datetime.datetime.fromtimestamp(time.time()).strftime('%c')
+print(datetime_now)
+
 
 print(str(len(users)) + " people:")
 
