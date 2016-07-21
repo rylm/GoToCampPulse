@@ -1,7 +1,6 @@
 import requests
-# import itertools
-# import pymongo
-# import time
+import pymongo
+import time
 
 url = "https://api.vk.com/method/users.get?fields=online&user_ids="
 
@@ -60,17 +59,27 @@ i = 0
 
 # client = pymongo.MongoClient()
 # db = client.test
-print(len(users))
+
+print(str(len(users)) + " человек:")
 
 for user_id in users:
-    profile = requests.get(url + str(user_id)).json()['response'][0]
-    first_name = profile['first_name']
-    last_name = profile['last_name']
-    is_online = profile['online']
+    url += user_id + ","
+
+profiles = requests.get(url).json()['response']
+print(profiles)
+
+for user in profiles:
+    first_name = user['first_name']
+    last_name = user['last_name']
+    is_online = user['online']
+    uid = user['uid']
+
     if is_online:
         online_counter += 1
+
     online_message = "не онлайн" if is_online == 0 else "онлайн"
-    if 'online_mobile' in profile.keys():
+
+    if 'online_mobile' in user.keys():
         print(first_name + " " + last_name + " " + online_message, end="")
         print(" через мобильную версию сайта или приложение")
     else:
@@ -79,9 +88,8 @@ for user_id in users:
 with open("last_number.txt", "w") as last_record:
     last_record.write(str(online_counter))
 
-# db.onliness.insert_one(
+# db.user_stats.insert_one(
 #     {
-#         "online_counter": online_counter,
-#         "time": int(time.time())
+#         int(time.time()): profiles
 #     }
 # )
