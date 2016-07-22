@@ -15,7 +15,7 @@ db = client.main
 
 while True:
     online_counter = 0
-    
+
     bar = progressbar.ProgressBar()
     for i in bar(range(60)):
         time.sleep(1)
@@ -30,7 +30,10 @@ while True:
     for user_id in users:
         url += user_id + ","
 
-    profiles = requests.get(url).json()['response']
+    try :
+        profiles = requests.get(url).json()['response']
+    except:
+        pass
 
     for user in profiles:
         first_name = user['first_name']
@@ -57,3 +60,4 @@ while True:
             str(int(time.time())): profiles
         }
     )
+
