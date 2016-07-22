@@ -33,7 +33,7 @@ while True:
     try :
         profiles = requests.get(url).json()['response']
     except:
-        pass
+        continue
 
     for user in profiles:
         first_name = user['first_name']
@@ -60,4 +60,6 @@ while True:
             str(int(time.time())): profiles
         }
     )
+
+    print(">>>>>" + str(online_counter) + "<<<<")
 
