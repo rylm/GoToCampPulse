@@ -6,14 +6,11 @@ import progressbar
 
 from users import users
 
-url = "https://api.vk.com/method/users.get?fields=online&user_ids="
-
-i = 0
-
 client = pymongo.MongoClient()
 db = client.main
 
 while True:
+    url = "https://api.vk.com/method/users.get?fields=online&user_ids="
     online_counter = 0
 
     bar = progressbar.ProgressBar()
@@ -30,10 +27,7 @@ while True:
     for user_id in users:
         url += user_id + ","
 
-    try :
-        profiles = requests.get(url).json()['response']
-    except:
-        continue
+    profiles = requests.get(url).json()['response']
 
     for user in profiles:
         first_name = user['first_name']
@@ -61,5 +55,5 @@ while True:
         }
     )
 
-    print(">>>>>" + str(online_counter) + "<<<<")
+    print("\n>>>>>" + str(online_counter) + "<<<<")
 
