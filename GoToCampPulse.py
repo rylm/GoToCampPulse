@@ -16,6 +16,8 @@ db = client.main
 while True:
     for second in range(1, 61):
         print(second)
+        time.sleep(1)
+
     print("================================================\n")
     datetime_now = datetime.datetime.fromtimestamp(time.time()).strftime('%c')
     print(datetime_now)
@@ -37,7 +39,7 @@ while True:
         if is_online:
             online_counter += 1
 
-        online_message = "is not online" if is_online == 0 else "is online"
+        online_message = "is not online" if not is_online else "is online"
 
         if 'online_mobile' in user.keys():
             print(first_name + " " + last_name + " " + online_message, end="")
