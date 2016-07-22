@@ -8,13 +8,14 @@ from users import users
 
 url = "https://api.vk.com/method/users.get?fields=online&user_ids="
 
-online_counter = 0
 i = 0
 
 client = pymongo.MongoClient()
 db = client.main
 
 while True:
+    online_counter = 0
+    
     bar = progressbar.ProgressBar()
     for i in bar(range(60)):
         time.sleep(1)
