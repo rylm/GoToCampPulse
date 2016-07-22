@@ -2,6 +2,7 @@ import requests
 import pymongo
 import time
 import datetime
+import progressbar
 
 from users import users
 
@@ -14,8 +15,8 @@ client = pymongo.MongoClient()
 db = client.main
 
 while True:
-    for second in range(1, 61):
-        print(second)
+    bar = progressbar.ProgressBar()
+    for i in bar(range(60)):
         time.sleep(1)
 
     print("================================================\n")
